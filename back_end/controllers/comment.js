@@ -6,7 +6,6 @@ exports.createComment = (req, res, next) => {
     if (regexStatus.test(req.body.message) && req.file != null) {
         const dataComment = {
             user_id: req.userId,
-            /* image: `/image_profil/${req.file.filename}` */
             text: req.body.text,
         }
         con.query('INSERT INTO comment SET ? WHERE status_id = ?;', [dataComment, req.body.statusId], (err, resultat) => {
@@ -29,7 +28,7 @@ exports.modifcomment = (req, res, next) => {
             if (err) {
                 return res.status(501).json({ message: 'Erreur dans le post ' });
             }
-            return res.status(201).json({ message: 'Post effectué ! ' });
+            return res.status(201).json({ message: 'satus effectué ! ' });
         });
     }
     else {

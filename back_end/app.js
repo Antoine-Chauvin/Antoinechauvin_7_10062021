@@ -11,9 +11,9 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 //va chercher la logique des routes dans le fichier nous servant à mutualiser les routes ensemble
-/* 
-const chanelRoutes = require('./routes/chanel');*/
-const statusRoutes = require ('./routes/status');
+
+const chanelRoutes = require('./routes/chanel_routes');
+const statusRoutes = require ('./routes/status_routes');
 const commentRoutes = require ('./routes/comment_routes');
 const userRoutes = require('./routes/user_routes'); 
 const profilesRoutes = require('./routes/profiles_routes'); 
@@ -37,6 +37,7 @@ app.use((req, res, next) => {
 app.use('/api/auth', userRoutes);
 app.use('/api/profile', profilesRoutes);
 app.use('/api/comment', commentRoutes);
-app.use('/api/comment', statusRoutes);
+app.use('/api/status', statusRoutes);
+app.use('/api/chanel', chanelRoutes);
 
 module.exports = app;
