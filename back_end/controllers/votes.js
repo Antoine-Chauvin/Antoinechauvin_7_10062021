@@ -1,38 +1,53 @@
 const con = require('../db_connect/mysql_connect');//permet d'avoir accès au serveur
 
 exports.vote = (req, res, next) => {
-    const voteUp = req.body.voteUp;
-    const voteDown = req.body.voteDown;
-    con.promise().query('SELECT value, user_id FROM vote WHERE user_id = ? ;',[req.userId])
-    .then(([err, result]) =>{
-        
-        if (voteUp === 1 && result[0] !== 1 ){
+    const vote = req.body.vote;
+    
+    if (vote !== 1 && vote !== 0){
+        return res.status(400).json({ message: 'tu te crois malin de mettre autre chose...'});
+    }
+
+    con.promise().query('SELECT id_vote,status_id,value, user_id FROM vote WHERE user_id = ? AND status_id = ? ;',[req.userId, req.body.statusId])
+    .then(([rows, fields]) =>{
+       
+        if (rows.length === 0){/* creatio du vote */
             con.query(
-                'INSERT INTO vote (value, user_id) VALUES (?,?,?);', [1,req.userId], (err, result) => {
+                'INSERT INTO vote (status_id, value, user_id) VALUES (?,?,?);', [req.body.statusId, vote, req.userId], (err, result) => {
                 if (err){
                     return (err);
                 }
-                return res.status(201).json({ message: '+1 up vote'});
+                return res.status(201).json({ message: 'à voté'});
             });
         }
-        else if (voteDown === 1 && result[0] !== 0 ){
-            con.query('UPDATE vote SET value = 0 ;', (err, result) => {
+
+        else if (rows[0].value === vote){/* suppr du vote */
+            con.query( 'DELETE FROM vote WHERE id_vote = ?;',[rows[0].id_vote], (err, result) => {
                 if (err){
                     return (err);
                 }
-                return res.status(201).json({ message: '+1 down vote'});
+                return res.status(201).json({ message: 'vote supp'});
             });
-            
         }
-        else if (voteUp == 1 && result[0] === 1 || voteDown == 1 && result[0] === 0 ){
-            con.query('UPDATE vote SET value = null ;', (err, result) => {
+        
+        else if (rows[0].value !== vote){ /* modifie le vote */
+            con.query( 'UPDATE vote SET value = ? WHERE id_vote = ? ;',[vote, rows[0].id_vote], (err, result) => {
                 if (err){
                     return (err);
                 }
-                return res.status(201).json({ message: 'rien à faire'});
+                return res.status(201).json({ message: 'vote modifié'});
             });
         }
+          
         
     })
     .catch(error => res.status(500).json({ error }));
+};
+
+
+exports.affichageNbrVotes = async (req, res, next) => {
+    const [upVote] = await con.promise().query('SELECT COUNT(id_vote) up_vote FROM vote WHERE value = 1 AND status_id = ?;',[req.body.statusId])
+    
+    const [downVote] = await con.promise().query('SELECT COUNT(id_vote) down_vote FROM vote WHERE value = 0 AND status_id = ?;',[req.body.statusId])
+    
+    return res.status(200).json({resulat : upVote[0].up_vote - downVote[0].down_vote});
 };

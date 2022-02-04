@@ -18,12 +18,12 @@
     - [x] récupératrion de tout les status d'un profil
     - [x] récupératrion de tout les status d'un chanel
 
-- [x] crud comment
-    - [x]avoir tout les comments d'un status
-    - [x]crée un comment
+- [x] crud comment [x] Total ok 
+    - [x] avoir tout les comments d'un status
+    - [x] crée un comment
     - [x] modifier son comment  
 
-- [ ] vote 
+- [x] vote 
 
 - [ ] admin
     - [ ] Blockage de status

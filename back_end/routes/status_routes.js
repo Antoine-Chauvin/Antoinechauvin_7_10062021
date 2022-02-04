@@ -12,6 +12,6 @@ router.get('/profile/getAllstatus',auth,statusCtrl.getAllstatusProfil)
 router.get('/chanel/getAllstatus',auth,statusCtrl.getAllstatusChanel)
 router.put('/modifyStatus',auth,statusCtrl.modifStatus)
 router.put('/voteStatus',auth,voteCtrl.vote)
-
+router.get('/voteNbr',auth,voteCtrl.affichageNbrVotes)
 
 module.exports = router;     
