@@ -76,7 +76,8 @@ exports.login = (req, res, next) => {
                         message: 'Login effectué, en cours de redirection',
                         userId: rows[0].id_user,
                         token: jwt.sign(
-                            { userId: rows[0].id_user },
+                            { userId: rows[0].id_user,
+                             isAdmin: rows[0].admin},
                             process.env.tk,
                             { expiresIn: '24h' }
                         ),
@@ -90,7 +91,7 @@ exports.login = (req, res, next) => {
 
 //accès au infos du profil
 exports.infosProfil = (req, res, next) => {  
-    con.query('SELECT name, lastname, image_user, email FROM user WHERE id_user= ?;', [req.params.id],//à revoir
+    con.query('SELECT name, lastname, image_user, email FROM user WHERE id_user= ?;', [req.userId],
     (err, result) => {
         if(err){
             return res.status(500).json({ message: 'Une erreur c\'est produite' });
@@ -107,7 +108,7 @@ exports.infosProfil = (req, res, next) => {
 
 //accès à tout les post du profil
 exports.allUserStatus = (req, res, next) => {
-con.query('SELECT title, image FROM status WHERE user_id = ? ORDER BY id_status DESC;',[req.params.id],//à revoir
+con.query('SELECT title, image FROM status WHERE user_id = ? ORDER BY id_status DESC;',[req.userId],//à revoir
 (err, result) => {
     if(err){
         return res.status(500).json({ message: 'Une erreur c\'est produite' });
@@ -128,7 +129,7 @@ exports.modifImgProfil = async (req,res,next) => {
     const [suppImgProfil] = await con.promise().query('SELECT image_user FROM user WHERE id_user = ?;', [req.userId])
     
     const imageSupp = suppImgProfil[0].image_user
-    console.log(imageSupp)
+    
     
 
     if (suppImgProfil != "imgProfilDef.jpg"){

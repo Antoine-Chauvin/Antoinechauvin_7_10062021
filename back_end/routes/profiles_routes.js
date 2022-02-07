@@ -5,7 +5,7 @@ const auth = require('../middlewares/auth')
 const multer = require('../middlewares/multer');
 
 router.get('/:id',auth,userCtrl.infosProfil);
-router.get('/status-user',auth,userCtrl.allUserStatus);
-router.put('/modif-user',auth, multer,userCtrl.modifImgProfil);
+router.get('/statusUser',auth,userCtrl.allUserStatus);
+router.put('/modifUser',auth, multer,userCtrl.modifImgProfil);
 
 module.exports = router;        

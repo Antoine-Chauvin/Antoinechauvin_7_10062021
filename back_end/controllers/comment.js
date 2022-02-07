@@ -37,7 +37,12 @@ exports.modifcomment = (req, res, next) => {
 // get all comments of a status
 exports.getComments = (req, res, next) => {
 
-    con.query('SELECT id_comment, text, user_id, status_id, id_user, name, lastname, image_user FROM comment JOIN user ON comment.user_id = user.id_user WHERE comment.status_id = ? ORDER BY id_comment DESC;', [req.body.statusId],
+    con.query(`SELECT id_comment, text, user_id, status_id, id_user, name, lastname, image_user
+                 FROM comment 
+                 JOIN user ON comment.user_id = user.id_user 
+                 WHERE comment.status_id = ? 
+                 ORDER BY id_comment DESC;`,
+                 [req.query.statusId],
         (err, resultat) => {
             if (err) {
                 return res.status(500).json({ err });

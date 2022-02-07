@@ -17,6 +17,7 @@ const statusRoutes = require ('./routes/status_routes');
 const commentRoutes = require ('./routes/comment_routes');
 const userRoutes = require('./routes/user_routes'); 
 const profilesRoutes = require('./routes/profiles_routes'); 
+const adminRoutes = require('./routes/admin_routes');
 
 
 
@@ -39,5 +40,6 @@ app.use('/api/profile', profilesRoutes);
 app.use('/api/comment', commentRoutes);
 app.use('/api/status', statusRoutes);
 app.use('/api/chanel', chanelRoutes);
+app.use('/api/admin', adminRoutes);
 
 module.exports = app;

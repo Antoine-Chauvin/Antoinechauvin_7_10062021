@@ -2,12 +2,8 @@ const con = require('../db_connect/mysql_connect');//permet d'avoir accès au se
 
 
 
-
-//chanel add new status ???
-
-
 // chanel creation 
-exports.chanelCreate = (req,res,next) =>{ 
+exports.createChanel = (req,res,next) =>{ 
     const titleChan = req.body.title
     const descriptionChan = req.body.content   
 
@@ -16,12 +12,27 @@ exports.chanelCreate = (req,res,next) =>{
     if (!regexSimpform.test(titleChan) || !regexSimpform.test(descriptionChan)) {
         return res.status(400).json({ message: 'Champs incomplet' });
     }
-    con.promise().query('INSERT INTO chanel (title, content, creator_id) VALUES (?, ?, ?,);', [titleChan,descriptionChan, req.params.id]),
+    con.query('INSERT INTO chanel (title, content, creator_id) VALUES (?, ?, ?);', [titleChan, descriptionChan, req.userId],
     (err, resultat) => {
+    
         if(err){   
             return res.status(400).json({ message: 'Une erreur c\'est produite' });
         }
         return res.status(201).json({ message: 'Chanel crée'});
-    }
+    })
 
 };
+//get all chanel 
+exports.getAllChanel = (req,res,next) =>{
+    con.query(`SELECT id_chanel, title FROM chanel;`,
+    (err, resultat) => {
+        if(err){   
+            return res.status(400).json({ message: 'Une erreur c\'est produite' });
+        }
+        return res.status(201).json(resultat);
+    })
+
+ }
+
+
+

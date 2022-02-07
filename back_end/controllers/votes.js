@@ -45,9 +45,9 @@ exports.vote = (req, res, next) => {
 
 
 exports.affichageNbrVotes = async (req, res, next) => {
-    const [upVote] = await con.promise().query('SELECT COUNT(id_vote) up_vote FROM vote WHERE value = 1 AND status_id = ?;',[req.body.statusId])
+    const [upVote] = await con.promise().query('SELECT COUNT(id_vote) up_vote FROM vote WHERE value = 1 AND status_id = ?;',[req.query.statusId])
     
-    const [downVote] = await con.promise().query('SELECT COUNT(id_vote) down_vote FROM vote WHERE value = 0 AND status_id = ?;',[req.body.statusId])
+    const [downVote] = await con.promise().query('SELECT COUNT(id_vote) down_vote FROM vote WHERE value = 0 AND status_id = ?;',[req.query.statusId])
     
     return res.status(200).json({resulat : upVote[0].up_vote - downVote[0].down_vote});
 };
