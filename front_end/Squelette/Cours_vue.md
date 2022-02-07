@@ -33,4 +33,4 @@
 
       si non pour les composant qui ne sont pas à charger direct on peut passer par un fonction anonyme pour optimiser le chargement de ///views.  
 
-      Toutes les pages crée dans /views devront être intégré index.js de /store  
+      Toutes les pages crée dans /views devront être intégré index.js de /router 

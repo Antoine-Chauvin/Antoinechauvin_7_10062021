@@ -1,4 +1,4 @@
-# p7_groupomania
+# goupomania_p7
 
 ## Project setup
 ```
