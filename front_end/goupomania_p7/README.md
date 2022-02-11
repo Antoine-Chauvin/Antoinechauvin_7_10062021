@@ -10,6 +10,19 @@ yarn install
 yarn serve
 ```
 
+#### In case of trouble cause of the version 
+    In the same terminal :
+ ```
+ nvm use lts/*
+ ```
+ ```
+ npm i -g yarn
+ ```
+    then 
+ ```
+ yarn serve
+ ```
+
 ### Compiles and minifies for production
 ```
 yarn build
