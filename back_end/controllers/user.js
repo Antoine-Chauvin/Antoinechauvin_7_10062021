@@ -22,7 +22,10 @@ exports.signup = (req, res, next) => {
     const mailUser = req.body.email
     const passUser = req.body.password
     const created_date = new Date()
-    const imgProfil = `/image_profil/${req.file.filename}`
+    let imgProfil 
+    if(req.file){
+    imgProfil = `/image_profil/${req.file.filename}`
+    }
 
     const regexName = /(.*[a-z]){3,30}/;
     //verification que les champs de nom prenom sont valide grâce aux regex    
@@ -42,7 +45,7 @@ exports.signup = (req, res, next) => {
                     .then(hash => {
                         con.promise().query('INSERT INTO user (email, password, name, lastname, created_at, image_user) VALUES (?, ?, ?, ?, ?, ?);', [mailUser, hash, name, lastName, created_date, imgProfil])
                             .then(hash => res.status(201).json({ message: 'Utilisateur créé !' }))
-                            .catch(error => res.status(400).json({ error }));
+                            .catch(error => res.status(500).json({message:'Erreur' }));
                     });
             }
             else {

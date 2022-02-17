@@ -24,14 +24,14 @@ const adminRoutes = require('./routes/admin_routes');
 // imporation bdd
 require('./db_connect/mysql_connect');
 
-//Permet au server de modifier des choses sur notre site ? CORS
+//Permet au server de modifier des choses sur notre site CORS
 app.use(express.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
+        next();
 });
 
 //utilisation de routeur
@@ -41,5 +41,7 @@ app.use('/api/comment', commentRoutes);
 app.use('/api/status', statusRoutes);
 app.use('/api/chanel', chanelRoutes);
 app.use('/api/admin', adminRoutes);
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
