@@ -1,11 +1,13 @@
 <template>
   <div class="header">
     <div class="logoGrp">
-      <img
-        src="../assets/icon-left-font-monochrome-black.png"
-        alt="Groupomania logo"
-        class="logo"
-      />
+      <router-link :to="{name: 'accueil'}">
+        <img
+          src="../assets/icon-left-font-monochrome-black.png"
+          alt="Groupomania logo"
+          class="logo"
+        />
+      </router-link>
     </div>
     <div class="nav">
       <div class="nav-icone" @click="showProfile">
@@ -22,7 +24,7 @@
       <div class="nav-icone">
         <img src="../assets/plus-square.svg" alt="" />
         <div class="createStatus">
-          <CreateStatus/>
+          <CreateStatus />
         </div>
       </div>
       <div class="nav-icone" @click="logout">
@@ -34,7 +36,7 @@
 
 <script>
 import Profile from './Profil.vue';
-import CreateStatus from './CreateStatus.vue'
+import CreateStatus from './CreateStatus.vue';
 
 export default {
   name: 'Header',
@@ -49,9 +51,8 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.removeItem('Token')
+      localStorage.removeItem('Token');
       this.$router.push({ name: 'Home' });
-      
     },
     showProfile() {
       this.showedProfile = true;
@@ -111,9 +112,9 @@ export default {
       height: 50px;
     }
     #Profile {
-      position:relative;
+      position: relative;
       left: 20%;
-      top:15%;
+      top: 15%;
       height: 100%;
       width: 100%;
     }

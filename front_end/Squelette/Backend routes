@@ -2,14 +2,14 @@ Routes to back
 
 user :
 
-Signup : http://localhost:3000/api/auth/signup
-Login  : http://localhost:3000/api/auth/login
+X Signup : http://localhost:3000/api/auth/signup
+X Login  : http://localhost:3000/api/auth/login
 
 Profil:
 
-infosProfil 			    : http://localhost:3000/api/profile/:id
-tout les status du user 	: http://localhost:3000/api/profile/statusUser
-modif de l'image user 		: http://localhost:3000/api/profile/modifUser
+X infosProfil 			    : http://localhost:3000/api/profile/:id
+X tout les status du user 	: http://localhost:3000/api/profile/statusUser
+X modif de l'image user 	: http://localhost:3000/api/profile/modifUser
 
 Admin: 
 block un user  : http://localhost:3000/api/admin/blockUser
@@ -17,15 +17,15 @@ block un status: http://localhost:3000/api/admin/blockStatus
 
 
 chanel :
-ceate chanel 		    : http://localhost:3000/api/chanel/createChanel
-avoir tout les chanel 	: http://localhost:3000/api/chanel/getChanels
+X create chanel 		    : http://localhost:3000/api/chanel/createChanel
+X avoir tout les chanel 	: http://localhost:3000/api/chanel/getChanels
 
 Status : 
 
-Create à status 		        : http://localhost:3000/api/status/createStatus
+X Create à status 		        : http://localhost:3000/api/status/createStatus
 get one statu 			        : http://localhost:3000/api/status/getOneStatus
-tout les status 		        : http://localhost:3000/api/status/getAllStatus
-tout les status d'un profile    : http://localhost:3000/api/status/profile/getAllStatus
+X tout les status 		        : http://localhost:3000/api/status/getAllStatus
+X tout les status d'un profile  : http://localhost:3000/api/status/profile/getAllStatus
 tout les status d'un chanel	    : http://localhost:3000/api/status/chanel/getAllStatus
 Modif de status 	    	    : http://localhost:3000/api/status/modifyStatus
 ajout d'un vote 	    	    : http://localhost:3000/api/status/voteStatus

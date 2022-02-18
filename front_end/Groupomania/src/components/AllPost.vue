@@ -8,44 +8,58 @@
         />
         <span>{{ status.name }}</span>
         <span>{{ status.lastname }}</span>
+        <div v-if="userCon.isAdmin === 1">
+      <button>bloquer l'utilisateur</button>
+      </div>
       </div>
       <div class="status__shared">
         <h3 class="status--title">{{ status.title }}</h3>
-        <img
-          :src="'http://localhost:3000/images' + status.image"
-          alt="Image shared"
-        />
+        <img :src="'http://localhost:3000/images' + status.image" alt="Image shared" />
       </div>
       <!-- <Vote /> -->
+      <div v-if="userCon.userId == status.user_id">
+      <button>Modifer</button>
+      </div>
+      <div v-if="userCon.isAdmin === 1">
+      <button>bloquer le status</button>
+      </div>
       <p>{{ status.created_at_status }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: 'Posts',
 
-  data() {
-    return {
-      posts: [],
-    };
+ data() {
+   return {
+     userCon : ''
+   }
+ },
+  props: {
+    posts: {
+      type: Array,
+      default: () => {
+        [];
+      },
+    },
+  },
+  methods: {
+    
+    verifUser() {
+      const userTk = localStorage.getItem('Token').split('.')[1];
+      const user = JSON.parse(atob(userTk));
+      this.userCon = user
+    },
   },
   mounted() {
-    axios
-      .get('http://localhost:3000/api/status/getAllStatus', {
-        headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
-      })
-      .then((response) => {
-        this.posts = response.data;
-      });
+    this.verifUser();
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scope>
 .posts {
   max-width: 85%;
 
@@ -55,15 +69,14 @@ export default {
     padding: 10px;
     margin: 15px;
     .status__creator {
-      img{
-        object-fit: cover; 
+      img {
+        object-fit: cover;
         height: 50px;
         width: 50px;
         border-radius: 50%;
       }
     }
     .status__shared {
-      
       img {
         height: 400px;
         width: 400px;

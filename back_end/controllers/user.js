@@ -63,7 +63,7 @@ exports.login = (req, res, next) => {
         return res.status(400).json({ error: 'champ non renseigné !' });
     }
 //verif du mail DB 
-    con.promise().query('SELECT password, id_user FROM user WHERE email = ?;', [mailUser])
+    con.promise().query('SELECT password, id_user, admin FROM user WHERE email = ?;', [mailUser])
         .then(([rows, fields]) => {
 //si pas de mail renvoie d'err
             if (rows.length === 0) {

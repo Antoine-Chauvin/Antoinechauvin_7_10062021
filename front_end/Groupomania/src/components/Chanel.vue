@@ -2,9 +2,9 @@
   <div class="chanels">
     <div>
       <h3>Chanels :</h3>
-      <div v-for="chanel in chanels" :key="chanel.id_chanel">
+      <div v-for="chanel in chanels" :key=chanel.id_chanel>
         <img src="../assets/hash.svg" alt="tag" />
-        <span>{{ chanel.title }}</span>
+        <router-link :to="{ name: 'Chanel', params: {id: chanel.id_chanel}}" class="span">{{ chanel.title }}</router-link>
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@ export default {
       chanels: [],
     };
   },
-  mounted() {
+mounted() {
     axios
       .get('http://localhost:3000/api/chanel/getChanels', {
         headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
@@ -47,7 +47,7 @@ export default {
     img {
       height: 18px;
     }
-    span {
+    .span {
       font-size: 20px;
     }
   }

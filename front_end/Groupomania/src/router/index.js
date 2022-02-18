@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import accueil from '../views/Accueil.vue';
+import Chanel from '../views/Chanel'
 
 
 Vue.use(VueRouter);
@@ -22,15 +23,15 @@ const routes = [
   },*/
   {
     path: '/',
-    name: 'Accueil',
+    name: 'accueil',
     component: accueil,
   },
   
-  /* {
+  {
     path:'/chanel/:id',
-    name:'chanel',
-    component: chanel,
-  }, */
+    name:'Chanel',
+    component: Chanel,
+  }, 
 ];
 
 const router = new VueRouter({

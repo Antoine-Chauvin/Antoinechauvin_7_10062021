@@ -54,7 +54,7 @@ export default {
           })
           .then((response) => {
             localStorage.setItem('Token', response.data.token)
-            this.$router.push({ name: 'Accueil' });
+            this.$router.push({ name: 'accueil' });
           })
           .catch((error) => {
             this.error = error.response.data.message;

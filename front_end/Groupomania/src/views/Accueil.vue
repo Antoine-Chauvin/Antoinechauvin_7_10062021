@@ -2,7 +2,7 @@
  <div class="accueil">
      <Header class="header"/>
      <Chanels class="chanel"/>
-     <Posts class="posts"/>
+     <Posts class="posts" :posts="posts"/>
 </div> 
 </template>
 
@@ -10,10 +10,16 @@
 import Chanels from '@/components/Chanel.vue';
 import Posts from '@/components/AllPost.vue';
 import Header from '@/components/Header.vue';
+import axios from 'axios';
 
 export default {
     name: 'accueil',
 
+data() {
+    return {
+        posts: [],
+    }
+},
     components:{
     Header,
     Chanels,
@@ -23,7 +29,16 @@ export default {
         if(!localStorage.getItem('Token')){
             return this.$router.push({name: 'Home'});
         }
-    }
+    },
+    mounted() {
+    axios
+      .get('http://localhost:3000/api/status/getAllStatus', {
+        headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
+      })
+      .then((response) => {
+        this.posts = response.data;
+      });
+  },
 
 }
 </script>

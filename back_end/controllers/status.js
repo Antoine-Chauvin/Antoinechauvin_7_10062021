@@ -28,9 +28,10 @@ exports.getAllstatusProfil = (req, res, next) => {
     })
 }
 exports.getAllstatusChanel = (req, res, next) => {
-    con.query(`SELECT id_status, status.title status_title, user_id, chanel_id, image ,chanel.title chanel_title, content
+    con.query(`SELECT id_status, status.title status_title, user_id, chanel_id, image ,chanel.title chanel_title, content, name, lastname, image_user, created_at_status
                 FROM status 
-                JOIN chanel ON status.chanel_id = chanel.id_chanel  
+                JOIN chanel ON status.chanel_id = chanel.id_chanel
+                JOIN user ON status.user_id = user.id_user   
                 WHERE block= 0 
                 AND chanel_id = ? 
                 ORDER BY id_status DESC;`,
