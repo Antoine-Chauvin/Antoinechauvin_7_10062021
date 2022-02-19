@@ -1,7 +1,7 @@
 <template>
   <div class="Profile">
     <div class="infosProfile">
-      <img :src="'http://localhost:3000/images' + profile.image_user" alt="Image de profile" />
+      <img :src="'http://localhost:3000/images' + defaultImg(profile.image_user)" alt="Image de profile" />
       <div>
         <h2>{{ profile.name }} {{ profile.lastname }}</h2>
       </div>
@@ -49,6 +49,13 @@ export default {
     },
     showModif(){
       this.modifImg = true
+    },
+        defaultImg(img) {
+      console.log(img);
+      if (!img) {
+        return '/pinkUser.png';
+      }
+      return img;
     },
   },
   mounted() {

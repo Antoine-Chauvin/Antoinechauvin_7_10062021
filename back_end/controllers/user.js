@@ -63,11 +63,14 @@ exports.login = (req, res, next) => {
         return res.status(400).json({ error: 'champ non renseigné !' });
     }
 //verif du mail DB 
-    con.promise().query('SELECT password, id_user, admin FROM user WHERE email = ?;', [mailUser])
+    con.promise().query('SELECT password, id_user, admin, state_block FROM user WHERE email = ?;', [mailUser])
         .then(([rows, fields]) => {
 //si pas de mail renvoie d'err
             if (rows.length === 0) {
                 return res.status(500).json({ message: "L'utilisateur n'existe pas" });
+            }
+            if(rows[0].state_block === 1){
+                return res.status(403).json({message: "Bonjour en raison de votre comportement un Admin a jugé bon vous de bloquer"})
             }
 //comparaison des mdp 
             bcrypt.compare(passUser, rows[0].password)

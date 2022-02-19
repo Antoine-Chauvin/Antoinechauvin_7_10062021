@@ -24,7 +24,7 @@
       <div class="nav-icone">
         <img src="../assets/plus-square.svg" alt="" />
         <div class="createStatus">
-          <CreateStatus />
+          <CreateStatus @update:status="$emit('update:status')"/>
         </div>
       </div>
       <div class="nav-icone" @click="logout">

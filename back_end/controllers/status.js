@@ -3,7 +3,7 @@ const fs = require('fs');
 
 //récupérer les status
 exports.getAllStatus = (req, res, next) => {
-    con.query(`SELECT id_status, title, user_id, image, name, lastname, image_user, created_at_status 
+    con.query(`SELECT id_status, title, user_id, image, name, lastname, image_user, created_at_status, chanel_id
                 FROM status 
                 JOIN user ON status.user_id = user.id_user  
                 WHERE block = 0 
@@ -28,7 +28,7 @@ exports.getAllstatusProfil = (req, res, next) => {
     })
 }
 exports.getAllstatusChanel = (req, res, next) => {
-    con.query(`SELECT id_status, status.title status_title, user_id, chanel_id, image ,chanel.title chanel_title, content, name, lastname, image_user, created_at_status
+    con.query(`SELECT id_status, status.title title, user_id, chanel_id, image ,chanel.title chanel_title, content, name, lastname, image_user, created_at_status
                 FROM status 
                 JOIN chanel ON status.chanel_id = chanel.id_chanel
                 JOIN user ON status.user_id = user.id_user   
@@ -88,8 +88,9 @@ console.log('toto')
 // Modifiaction de son status
 exports.modifStatus = async (req, res, next) => {
     const regexStatus = /[a-zA-Z0-9 _.,!?€'’(Ééèàû)&]{2,100}$/;
-
-    const imgToShare = `/image_shared/${req.file.filename}`
+    let imgToShare
+if(req.file){
+    imgToShare = `/image_shared/${req.file.filename}`
     const [suppImgShared] = await con.promise().query('SELECT image FROM status WHERE user_id = ?;', [req.userId])
 
     const imageSupp = suppImgShared[0].image
@@ -98,13 +99,14 @@ exports.modifStatus = async (req, res, next) => {
         fs.unlink(`images${imageSupp}`, () => {
         })
     }
-
-    if (regexStatus.test(req.body.title) && imgToShare != null ) {
+}
+    if (regexStatus.test(req.body.title)) {
         const dataStatus = {
             title:req.body.title,
-            image: imgToShare,
             chanel_id:req.body.chanChoose,
-            created_at_status:new Date()
+            }
+        if (imgToShare){
+            dataStatus.image = imgToShare
             
         }
         con.query('UPDATE status SET ? WHERE user_id = ? AND id_status = ? ;', [dataStatus, req.userId, req.body.statusId], (err, resultat) => {
@@ -116,6 +118,6 @@ exports.modifStatus = async (req, res, next) => {
         });
     }   
     else {
-        return res.status(501).json({ message: 'Erreur dans les données transmises ' });
+        return res.status(400).json({ message: 'Erreur dans les données transmises ' });
     }
 };

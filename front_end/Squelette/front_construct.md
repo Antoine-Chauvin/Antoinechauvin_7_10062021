@@ -1,24 +1,34 @@
 #P7 Front :
 
-- [ ] trouver un maquette
-- [ ] mobilfirst & responsive tablette, Pc
+
+- [ ] CSS mobilfirst & responsive tablette, Pc
 
 
 - [ ] Création de compte
-- [ ] login
-- [ ] Profile
-    - [ ] Info modifiable par l'ui pocesseur
-          - [ ] Nom & prénom 
-          - [ ] photo (mettre en place une image de base un icone)
-- [ ] Accueil une fois co
-    - [ ] list des chanels à gauche
-    - [ ] au milieu les status du chanel sélectionner 
-    - [ ] droite voir les gens dans le chanel (yolo à voir) 
-- [ ] chanel page
-    - [ ] Tous les status diffusés avec leur vote + nbr & h1 & nom éditeur 
+    - [x] Création du compte
+    - [x] Envoie du form en bdd
+    - [ ] connexion après envois du formulaire
+
+- [x] login
+- [x] Profile
+    - [x] Info modifiable par l'ui pocesseur
+          - [x] Nom & prénom 
+          - [x] photo 
+          - [ ] mettre en place une image de base un icone
+- [x] Accueil une fois co
+    - [x] list des chanels à gauche router vers leur page
+    - [x] au milieu les status du chanel sélectionner 
+- [x] chanel page
+    - [x] Tous les status diffusés du chanel
 - [ ] Status 
-    - [ ] Afichage des comments
-    - [ ] Affichage des votes 
-    - [ ] nbr de votes 
-    - [ ] By who
+    - [x] poster du contenu
+    - [x] afficher le contenu  
+    - [ ] Afichage des comments après clic sur le corps du status dans une nouvelle page grâce au router
+    - [ ] Affichage des likes 
+    - [ ] nbr de votes ???
+    - [x] By who
+- [ ] Comments
+    - [ ] by who
+    - [ ] corps du com
+
 

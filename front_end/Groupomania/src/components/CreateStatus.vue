@@ -8,7 +8,7 @@
           {{ chanel.title }}
         </option>
       </select>
-      <button type="submit">Mettre à jour</button>
+      <button type="submit">Partager</button>
     </form>
   </div>
 </template>
@@ -21,7 +21,14 @@ export default {
       chanels: '',
       chanChoose: '',
       title: '',
+      files:{},
     };
+  },
+  props:{
+    postToModif:{
+      type:Object,
+      default: null,
+    },
   },
   methods: {
     uploadFile(event) {
@@ -34,13 +41,25 @@ export default {
       }
       formData.append('title', this.title);
       formData.append('chanChoose', this.chanChoose);
+      if(this.postToModif == null){
       axios
         .post('http://localhost:3000/api/status/createStatus', formData, {
           headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
         })
         .then((res) => {
           console.log(res);
+          this.$emit('update:status')
         });
+        }
+        else{
+          formData.append('statusId',this.postToModif.id_status)
+          axios.put('http://localhost:3000/api/status/modifyStatus',
+          formData, 
+          {headers: { authorization: `bearer ${localStorage.getItem('Token')}`}})
+        .then(()=>{
+          this.$emit('update:status')
+          });
+        }
     },
   },
    mounted() {
@@ -51,6 +70,10 @@ export default {
         .then((response) => {
           this.chanels = response.data;
         });
+        this.title = this.postToModif?.title || this.title
+        this.chanChoose = this.postToModif?.chanel_id || this.chanelChoose
+          // "?" renvoi un undifined si l'obj n'existe pas evite ainsi les err
+          // "||" vient dire que "title" est la val par defaut de l'opération (là postToModif)
     },
 };
 </script>
