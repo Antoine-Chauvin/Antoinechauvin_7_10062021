@@ -1,12 +1,15 @@
 <template>
   <div class="home">
-    <button @click="showCo" v-if="showsignup">Connexion</button>
-    <button @click="showSi" v-if="showConnect">signup</button>
-    <div class="Connexion" v-if="showConnect">
-      <Login />
-    </div>
-    <div class="inscription" v-if="showsignup">
-      <Inscription />
+    <img src="../assets/icon-left-font-monochrome-orange.svg" alt="" />
+    <div class="homeForm">
+      <button @click="showCo" v-if="showsignup">Connexion</button>
+      <button @click="showSi" v-if="showConnect">signup</button>
+      <div class="Connexion" v-if="showConnect">
+        <Login />
+      </div>
+      <div class="inscription" v-if="showsignup">
+        <Inscription />
+      </div>
     </div>
   </div>
 </template>
@@ -32,24 +35,44 @@ export default {
   methods: {
     showCo() {
       if (this.showConnect == true) {
-         this.showConnect = false
-         this.showsignup = true;
-      }
-      else{
-       this.showConnect = true
-       this.showsignup = false;
+        this.showConnect = false;
+        this.showsignup = true;
+      } else {
+        this.showConnect = true;
+        this.showsignup = false;
       }
     },
     showSi() {
       if (this.showsignup == false) {
-        this.showsignup = true
+        this.showsignup = true;
         this.showConnect = false;
+      } else {
+        this.showsignup = false;
+        this.showConnect = true;
       }
-      else{
-       this.showsignup = false
-       this.showConnect = true;
-       }
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '../assets/mainCss/main.scss';
+.home {
+  img {
+    width: 100%;
+    @media screen and (min-width: 768px) {
+      width: 70%;
+    }
+  }
+  .homeForm {
+    background: $secondBg;
+      margin: auto;
+      margin-top: 30px;
+      border-radius: 30px;
+      width: 80%;
+    @media screen and( min-width: 768px) {
+      width: 700px;
+    }
+  }
+}
+</style>

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="Status">
     <Header @update:status="getPosts($route.params.id)" />
     <Chanels />
-    <AllPost :posts="posts" />
+    <AllPost :posts="posts" @update:status="getPost($route.params.id)" />
     <div class="createComment">
       <form @submit.prevent="handleSubmit">
         <input type="text" v-model="text" placeholder="Votre commentaire" />
@@ -15,11 +15,11 @@
           :src="'http://localhost:3000/images' + defaultImg(comment.image_user)"
           alt="Image de profile du créateur"
         />
-        <span>{{ comment.name }}</span>
-        <span>{{ comment.lastname }}</span>
+        <h3>{{ comment.name }} {{ comment.lastname }}</h3>
+        <p>à mis en commentaire:</p>
       </div>
       <div>
-        <h4>{{ comment.text }}</h4>
+        <p class="commShared">{{ comment.text }}</p>
       </div>
     </div>
   </div>
@@ -95,9 +95,51 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scope>
+
+@import "../assets/mainCss/main.scss";
+
 .createComment {
   position: relative;
-  top: 90px;
+  top: 125px;
+  left: 0;
+  @media screen and (min-width:768px) {
+    top: 90px;
+    width: 900px;
+    left: 25%;
+  }
+
+}
+.comments{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: $shadowBox;
+  top:125px;
+  @media screen and (min-width:768px) {
+     width: 900px;
+      left: 25%;
+      top:90px;
+  }
+  .commentsCreator{
+    display: flex;
+    flex-wrap: wrap;
+    img{
+    @include imgCrea;
+    margin-left:15px;
+    margin-top:5px;
+    }
+    h3{ 
+      display: inline;
+      width: 20%;
+    }
+    p{
+      margin-top: 21.280px;
+    }
+  }
+.commShared{
+align-self:left;
+}
 }
 </style>

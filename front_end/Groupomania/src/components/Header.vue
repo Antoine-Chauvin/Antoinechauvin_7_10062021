@@ -1,30 +1,40 @@
 <template>
   <div class="header">
+    <!--  -->
     <div class="logoGrp">
       <router-link :to="{name: 'accueil'}">
         <img
-          src="../assets/icon-left-font-monochrome-black.png"
+          src="../assets/icon-left-font-monochrome-orange.svg"
           alt="Groupomania logo"
           class="logo"
         />
       </router-link>
     </div>
+    <!--  -->
     <div class="nav">
       <div class="nav-icone" @click="showProfile">
-        <img src="../assets/user.svg" alt="" />
+        <img src="../assets/user.svg" alt="Profile" />
       </div>
-      <div class="showProfile" v-if="showedProfile">
+              <!--  -->
+      <div class="showOption" v-if="showedProfile">
         <div class="closingCross" @click="closeProfile">
           <img src="../assets/x.svg" alt="fermer" />
         </div>
-        <div id="Profile">
-          <Profile />
+        <div class="vue">
+          <Profile @update:status="$emit('update:status')" />
         </div>
       </div>
-      <div class="nav-icone">
-        <img src="../assets/plus-square.svg" alt="" />
-        <div class="createStatus">
-          <CreateStatus @update:status="$emit('update:status')"/>
+      <!--  -->
+      <div class="nav-icone" @click="showCreate">
+        <img src="../assets/plus-square.svg" alt="Creation de status" />
+      </div>
+              <!--  -->
+      <div class="showOption" v-if="showedCreate">
+        <div class="closingCross" @click="closeCreate">
+          <img src="../assets/x.svg" alt="fermer" />
+        </div>
+        <div class="vue">
+          <CreateStatus @update:status="$emit('update:status')" />
         </div>
       </div>
       <div class="nav-icone" @click="logout">
@@ -43,6 +53,7 @@ export default {
   data() {
     return {
       showedProfile: false,
+      showedCreate : false,
     };
   },
   components: {
@@ -60,27 +71,40 @@ export default {
     closeProfile() {
       this.showedProfile = false;
     },
+    showCreate() {
+      this.showedCreate = true;
+    },
+    closeCreate() {
+      this.showedCreate = false;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/mainCss/main.scss";
 .header {
-  background-color: rgb(248, 165, 156);
+  background-color:$secondBg;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 85px;
+  border-radius: 0;
+  @media screen and (min-width:768px) {
+  border-radius:15px ;
+  }
+  
 
   .logoGrp {
-    width: 35%;
+    width: 55%;
     height: 80px;
     margin-left: 3%;
     align-content: center;
+      @media screen and (min-width:768px) {
+    width: 35%;}
     .logo {
-      height: 100%;
+      height: 98%;
       width: 73%;
-      object-fit: cover;
     }
   }
   .nav {
@@ -88,35 +112,27 @@ export default {
     width: 30%;
     display: flex;
     align-content: flex-end;
-    justify-content: space-around;
+    justify-content: space-around;    
     .nav-icone {
+      width: 30%;
+      @media screen and (min-width:768px) {
       width: 50%;
+    }
       img {
-        width: 50px;
+        width: 30px;
+        @media screen and (min-width:768px) {
+          width: 50px;
+  }
       }
     }
   }
-  .showProfile {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.315);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 12;
+  .showOption{
+    @include showOption;
     .closingCross {
-      position: relative;
-      left: 80%;
-      top: 10%;
-      width: 50px;
-      height: 50px;
+      @include closingCross ;
     }
-    #Profile {
-      position: relative;
-      left: 20%;
-      top: 15%;
-      height: 100%;
-      width: 100%;
+    .vue {
+      @include contentModif;
     }
   }
 }

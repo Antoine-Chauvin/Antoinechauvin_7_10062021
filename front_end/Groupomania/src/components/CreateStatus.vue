@@ -1,10 +1,13 @@
 <template>
   <div class="createStatus">
     <form @submit.prevent="handleSubmit">
-      <input type="file" @change="uploadFile" />
+      <h3>Création d'un status</h3>
       <input type="text" v-model="title" placeholder="Titre du status" />
-      <select name="Chanels" v-model="chanChoose">
-        <option v-for="chanel in chanels" :key="chanel.id_chanel" :value="chanel.id_chanel">
+      <h4>Envoyez votre image :</h4>
+      <input type="file" @change="uploadFile" />
+      <h4>Choisissez un chanel</h4>
+      <select name="Chanels" v-model="chanChoose" >
+       <option v-for="chanel in chanels" :key="chanel.id_chanel" :value="chanel.id_chanel">
           {{ chanel.title }}
         </option>
       </select>
@@ -49,6 +52,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.$emit('update:status')
+          this.$emit('')
         });
         }
         else{
@@ -78,4 +82,28 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+@import "../assets/mainCss/main.scss";
+.createStatus{
+  @include cardOptionHeader;
+  form{
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    input{
+      width: 30%;
+      height: 25px;
+      align-self: center;
+    }
+    select{
+      width: 30%;
+      height: 25px;
+      align-self: center;
+    }
+    button{
+    align-self: center;
+    }
+
+  }
+}
+</style>

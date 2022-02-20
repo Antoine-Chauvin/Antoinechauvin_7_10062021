@@ -14,13 +14,12 @@
           :src="'http://localhost:3000/images' + defaultImg(status.image_user)"
           alt="Image de profile du créateur"
         />
-        <span>{{ status.name }}</span>
-        <span>{{ status.lastname }}</span>
+        <h2>{{ status.name }} {{ status.lastname }}</h2>
         <div v-if="userCon.isAdmin === 1">
           <button @click.prevent="blocageCompte(status.user_id)">bloquer l'utilisateur</button>
         </div>
       </div>
-      <router-link :to="{ name: 'Status', params: { id: status.id_status } }">
+      <router-link class="router-link" :to="{ name: 'Status', params: { id: status.id_status } }">
         <div class="status__shared">
           <h3 class="status--title">{{ status.title }}</h3>
           <img :src="'http://localhost:3000/images' + status.image" alt="Image shared" />
@@ -125,29 +124,58 @@ export default {
 </script>
 
 <style lang="scss" scope>
+@import "../assets/mainCss/main.scss";
 .posts {
-  max-width: 85%;
-
+  max-width: 100%;
+  @media screen and (min-width:768px) {
+    max-width: 85%;
+}
+  .popupModif{
+    @include showOption;
+    .closingCross{
+      @include closingCross;
+    }
+    .createStatus{
+      @include contentModif;
+    }
+  }
   .status {
+    background-color: $thirdBg;
     box-shadow: 0px 0px 6px -2px grey;
     border-radius: 10px;
     padding: 10px;
     margin: 15px;
     .status__creator {
+          display: flex;
+          justify-content: center;
       img {
-        object-fit: cover;
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
+       @include imgCrea;
       }
-    }
+      div.button{
+        margin-left: 5%;
+      }
+     }
     .status__shared {
       img {
-        height: 400px;
-        width: 400px;
-        object-fit: cover;
+        max-height: 700px;
+        width:95%;
+        object-fit: contain;
       }
     }
+    div.like{
+        position: relative;
+        left: 80%;
+        top: 50px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: $main_color;
+        img{
+          width: 75%;
+          margin-top:6%;   
+          margin-left: 6%;       
+        }
+      }
   }
 }
 </style>

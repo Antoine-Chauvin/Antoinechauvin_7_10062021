@@ -1,11 +1,15 @@
 <template>
   <div class="chanel">
-    <div>
+    <button class="burger" @click="showMenu">
+        <span class="bar"></span>
+      </button>
+    <div :class="{ouverte: showedBurger == true}" class="chanelsList">
       <h3>Chanels :</h3>
       <div v-for="chanel in chanels" :key=chanel.id_chanel>
         <img src="../assets/hash.svg" alt="tag" />
-        <router-link :to="{ name: 'Chanel', params: {id: chanel.id_chanel}}" class="span">{{ chanel.title }}</router-link>
+        <router-link class="router-link" :to="{ name: 'Chanel', params: {id: chanel.id_chanel}}">{{ chanel.title }}</router-link>
       </div>
+      
     </div>
   </div>
 </template>
@@ -20,7 +24,18 @@ export default {
   data() {
     return {
       chanels: [],
+      showedBurger:false
     };
+  },
+  methods: {
+    showMenu(){
+      if(this.showedBurger == false){
+      this.showedBurger = true;
+      }
+      else{
+        this.showedBurger = false;
+      }
+    },
   },
 mounted() {
     axios
@@ -35,21 +50,84 @@ mounted() {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/mainCss/main.scss";
+
 .chanel {
+  position: fixed;
+  top:80px;
+  width: 100%;
+  border-bottom-left-radius:20px ;
+  border-bottom-right-radius:20px ;
+  @media screen and (min-width: 768px) {
   width: 20%;
   height: 80%;
   box-shadow: 0px 0px 6px -2px grey;
-  background-color: rgb(248, 165, 156);
+  background-color:$secondBg;
   border-radius: 20px;
-
-  div {
+  top: 100px;
+  }
+  .chanelsList {
+    display: none;
+    @media screen and (min-width: 768px){
+      display: block;
+    }
+    h3{
+      color: $main-color;
+    }
     padding: 7px;
     img {
       height: 18px;
     }
-    .span {
-      font-size: 20px;
+    .router-link {
+      font-size: 25px;
+      color:$main_color;
     }
+  }
+  .ouverte{
+    display: block;
+  }
+
+  .burger{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 0;
+    width: 100%;
+    height:45px;
+    border:none;
+    background: $secondBg ;
+    margin:0;
+    border-top-left-radius: 0;
+    border-top-right-radius:0 ;
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+
+      .bar{
+        display: block;
+        width: 5px;
+        height: 5px;
+        background-color: $main_color;
+        border-radius: 5px;
+      }
+      .bar::before, .bar::after{
+        content: "";
+        display: block;
+        width: 5px;
+        height: 5px;
+        background-color: $main_color;
+        border-radius: 5px;
+        position: absolute;
+        
+      }
+
+      .bar::before{
+        transform: translateX(-10px);
+      }
+      .bar::after{
+        transform: translateX(10px);
+      }
   }
 }
 </style>

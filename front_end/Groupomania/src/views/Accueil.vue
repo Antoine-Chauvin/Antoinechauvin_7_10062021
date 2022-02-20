@@ -48,22 +48,4 @@ export default {
 </script>
 
 <style lang="scss">
-.header {
-  width: 100%;
-  position: fixed;
-  z-index: 11;
-  top: 0;
-}
-.chanel {
-  float: left;
-  position: fixed;
-  top: 100px;
-  z-index: 10;
-}
-.posts {
-  position: relative;
-  left: 25%;
-  top: 90px;
-  width: 900px;
-}
 </style>

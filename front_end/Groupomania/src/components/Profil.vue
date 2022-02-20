@@ -2,20 +2,16 @@
   <div class="Profile">
     <div class="infosProfile">
       <img :src="'http://localhost:3000/images' + defaultImg(profile.image_user)" alt="Image de profile" />
-      <div>
-        <h2>{{ profile.name }} {{ profile.lastname }}</h2>
-      </div>
+      <h2>{{ profile.name }} {{ profile.lastname }}</h2>
     </div>
-    <button @click="showModif">Modifier l'avatar</button>
+    <button class="modifProfile" @click="showModif">Modifier l'avatar</button>
     <div class="modifImg" v-if="modifImg">
       <form @submit.prevent="handleSubmit">
         <input type="file" @change="uploadFile" />
         <button type="submit">Mettre à jour</button>
       </form>
     </div>
-    <div class="AfficherStatus"></div>
-    <button type="submit">Mes Status</button>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -43,7 +39,7 @@ export default {
       {headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
       })
       .then((res) => {
-       
+       this.$emit('update:status')
        console.log(res);
       });
     },
@@ -71,23 +67,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/mainCss/main.scss";
 .Profile {
-  background: white;
-  width: 800px;
-  height: 500px;
-  border-radius: 20px;
-  display: flex;
+  @include cardOptionHeader;
+    display: flex;
   flex-direction: column;
-  .infosProfile {
-    height: 100%;
+.infosProfile {
+    height: 80%;
     width: 100%;
     img {
       width: 300px;
       height: 300px;
       object-fit: cover;
       border-radius: 50%;
-      box-shadow: 0px 0px 6px -2px grey;
+      box-shadow: $shadowBox;
     }
+  }
+  .modifProfile{
+    align-self: center;
   }
 }
 </style>
