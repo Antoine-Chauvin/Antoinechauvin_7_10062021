@@ -13,5 +13,6 @@ router.get('/chanel/getAllStatus',auth,statusCtrl.getAllstatusChanel)
 router.put('/modifyStatus',auth,multer,statusCtrl.modifStatus)
 router.put('/voteStatus',auth,voteCtrl.vote)
 router.get('/voteNbr',auth,voteCtrl.affichageNbrVotes)
+router.get('/liked',auth,voteCtrl.liked)
 
 module.exports = router;     

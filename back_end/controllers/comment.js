@@ -2,11 +2,14 @@ const con = require('../db_connect/mysql_connect');//permet d'avoir accès au se
 
 //create a comment
 exports.createComment = (req, res, next) => {
+    console.log(req.body);
     const regexStatus = /[a-zA-Z0-9 _.,!?€'’(Ééèàû)&]{2,100}$/;
     if (regexStatus.test(req.body.text)) {
 
         con.query('INSERT INTO comment SET text = ?, user_id = ?, status_id = ?;', [req.body.text, req.userId, req.body.statusId], (err, resultat) => {
             if (err) {
+                console.log(err);
+                
                 return res.status(501).json({ message: 'Erreur dans le post ' });
             }
             return res.status(201).json({ message: 'Post effectué ! ' });

@@ -3,9 +3,10 @@ const fs = require('fs');
 
 //récupérer les status
 exports.getAllStatus = (req, res, next) => {
-    con.query(`SELECT id_status, title, user_id, image, name, lastname, image_user, created_at_status, chanel_id
+    con.query(`SELECT id_status, title, status.user_id user_id, image, name, lastname, image_user, created_at_status, chanel_id, value
                 FROM status 
                 JOIN user ON status.user_id = user.id_user  
+                LEFT JOIN vote ON status.id_status = vote.status_id 
                 WHERE block = 0 
                 ORDER BY id_status DESC;`, (err, result) => {
         if (err) {
@@ -16,8 +17,9 @@ exports.getAllStatus = (req, res, next) => {
 };
 
 exports.getAllstatusProfil = (req, res, next) => {
-    con.query(`SELECT id_status, title, user_id, chanel_id, image 
+    con.query(`SELECT id_status, title, user_id, chanel_id, image , value
                FROM status 
+               JOIN vote ON status.id_status = vote.status_id 
                WHERE block= 0 
                AND user_id = ? 
                ORDER BY id_status DESC;`, [req.userId], (err, result) => {
@@ -28,10 +30,11 @@ exports.getAllstatusProfil = (req, res, next) => {
     })
 }
 exports.getAllstatusChanel = (req, res, next) => {
-    con.query(`SELECT id_status, status.title title, user_id, chanel_id, image ,chanel.title chanel_title, content, name, lastname, image_user, created_at_status
+    con.query(`SELECT id_status, status.title title, status.user_id user_id, chanel_id, image ,chanel.title chanel_title, content, name, lastname, image_user, created_at_status, value
                 FROM status 
                 JOIN chanel ON status.chanel_id = chanel.id_chanel
-                JOIN user ON status.user_id = user.id_user   
+                JOIN user ON status.user_id = user.id_user 
+                LEFT JOIN vote ON status.id_status = vote.status_id 
                 WHERE block= 0 
                 AND chanel_id = ? 
                 ORDER BY id_status DESC;`,
@@ -44,9 +47,10 @@ exports.getAllstatusChanel = (req, res, next) => {
 }
 
 exports.getOneStatus = (req, res, next) => {
-    con.query(`SELECT id_status, title, user_id, chanel_id, created_at_status, image, name, lastname, image_user 
+    con.query(`SELECT id_status, title, status.user_id user_id, chanel_id, created_at_status, image, name, lastname, image_user, value
                 FROM status 
                 JOIN user ON status.user_id = user.id_user 
+                LEFT JOIN vote ON status.id_status = vote.status_id 
                 WHERE block="0" AND id_status = ?;`, [req.query.statusId], (err, result) => {
         if (err) {
             throw (err);

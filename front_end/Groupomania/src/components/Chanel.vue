@@ -1,5 +1,5 @@
 <template>
-  <div class="chanels">
+  <div class="chanel">
     <div>
       <h3>Chanels :</h3>
       <div v-for="chanel in chanels" :key=chanel.id_chanel>
@@ -35,7 +35,7 @@ mounted() {
 </script>
 
 <style lang="scss" scoped>
-.chanels {
+.chanel {
   width: 20%;
   height: 80%;
   box-shadow: 0px 0px 6px -2px grey;

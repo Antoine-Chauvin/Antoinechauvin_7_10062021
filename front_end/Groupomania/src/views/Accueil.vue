@@ -1,8 +1,8 @@
 <template>
   <div class="accueil">
-    <Header class="header" @update:status="loadStatus()" />
-    <Chanels class="chanel" />
-    <Posts class="posts" :posts="posts" @update:status="loadStatus()" />
+    <Header  @update:status="loadStatus()" />
+    <Chanels/>
+    <Posts :posts="posts" @update:status="loadStatus()" />
   </div>
 </template>
 
@@ -61,8 +61,9 @@ export default {
   z-index: 10;
 }
 .posts {
-  position: absolute;
-  right: 40%;
-  top: 100px;
+  position: relative;
+  left: 25%;
+  top: 90px;
+  width: 900px;
 }
 </style>

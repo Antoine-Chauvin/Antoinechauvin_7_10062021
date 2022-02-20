@@ -51,3 +51,10 @@ exports.affichageNbrVotes = async (req, res, next) => {
     
     return res.status(200).json({resulat : upVote[0].up_vote - downVote[0].down_vote});
 };
+
+exports.liked = (req, res, next) => {
+    con.promise().query('SELECT id_vote,status_id,value, user_id FROM vote WHERE user_id = ? AND status_id = ? ;',[req.userId, req.body.statusId])
+    .then((result)=>{
+        return res.status(200).json({result})
+    })
+};

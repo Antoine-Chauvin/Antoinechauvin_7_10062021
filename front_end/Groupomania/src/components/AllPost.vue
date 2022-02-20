@@ -17,21 +17,26 @@
         <span>{{ status.name }}</span>
         <span>{{ status.lastname }}</span>
         <div v-if="userCon.isAdmin === 1">
-          <button @click="blocageCompte(status.user_id)">bloquer l'utilisateur</button>
+          <button @click.prevent="blocageCompte(status.user_id)">bloquer l'utilisateur</button>
         </div>
       </div>
-      <div class="status__shared">
-        <h3 class="status--title">{{ status.title }}</h3>
-        <img :src="'http://localhost:3000/images' + status.image" alt="Image shared" />
-      </div>
-      <!-- <Vote /> -->
-      <div v-if="userCon.userId == status.user_id">
-        <button @click="showModif(status)">Modifer</button>
-      </div>
-      <div v-if="userCon.isAdmin === 1">
-        <button @click="blocageStatus(status.id_status)">bloquer le status</button>
-      </div>
-      <p>{{ status.created_at_status }}</p>
+      <router-link :to="{ name: 'Status', params: { id: status.id_status } }">
+        <div class="status__shared">
+          <h3 class="status--title">{{ status.title }}</h3>
+          <img :src="'http://localhost:3000/images' + status.image" alt="Image shared" />
+        </div>
+        <div class="like">
+          <img src="../assets/thumbs-up.svg" alt="like" @click.prevent="like(status.id_status, 1)" v-if="status.value !==1" />
+          <img src="../assets/thumbs-up-filled.svg" alt="unlike" @click.prevent="like(status.id_status,0)" v-else />
+        </div>
+        <div v-if="userCon.userId == status.user_id">
+          <button @click.prevent="showModif(status)">Modifer</button>
+        </div>
+        <div v-if="userCon.isAdmin === 1">
+          <button @click.prevent="blocageStatus(status.id_status)">bloquer le status</button>
+        </div>
+        <p>{{ status.created_at_status }}</p>
+      </router-link>
     </div>
   </div>
 </template>
@@ -95,6 +100,16 @@ export default {
           this.$emit('update:status');
         });
     },
+    like(id, value) {
+      axios.put('http://localhost:3000/api/status/voteStatus', 
+      { statusId: id, vote: value},
+      {headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
+      })
+      .then(() => {
+          this.$emit('update:status');
+        });
+      
+      },
     defaultImg(img) {
       console.log(img);
       if (!img) {

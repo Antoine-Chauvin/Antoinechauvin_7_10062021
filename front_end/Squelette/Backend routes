@@ -12,8 +12,8 @@ X tout les status du user 	: http://localhost:3000/api/profile/statusUser
 X modif de l'image user 	: http://localhost:3000/api/profile/modifUser
 
 Admin: 
-block un user  : http://localhost:3000/api/admin/blockUser
-block un status: http://localhost:3000/api/admin/blockStatus
+X block un user  : http://localhost:3000/api/admin/blockUser
+X block un status: http://localhost:3000/api/admin/blockStatus
 
 
 chanel :
@@ -23,15 +23,16 @@ X avoir tout les chanel 	: http://localhost:3000/api/chanel/getChanels
 Status : 
 
 X Create à status 		        : http://localhost:3000/api/status/createStatus
-get one statu 			        : http://localhost:3000/api/status/getOneStatus
+X get one statu 			        : http://localhost:3000/api/status/getOneStatus
 X tout les status 		        : http://localhost:3000/api/status/getAllStatus
 X tout les status d'un profile  : http://localhost:3000/api/status/profile/getAllStatus
 tout les status d'un chanel	    : http://localhost:3000/api/status/chanel/getAllStatus
-Modif de status 	    	    : http://localhost:3000/api/status/modifyStatus
+X Modif de status 	    	    : http://localhost:3000/api/status/modifyStatus
 ajout d'un vote 	    	    : http://localhost:3000/api/status/voteStatus
 récup de la somme des vote 	    : http://localhost:3000/api/status/voteNbr
+récup du like                   : http://localhost:3000/api/status/liked
 
 Comments : 
-Get all comments drom a status  : http://localhost:3000/api/comment/allComments
+Get all comments from a status  : http://localhost:3000/api/comment/allComments
 create a commment 		        : http://localhost:3000/api/comment/createComment
 Modifier un comment 		    : http://localhost:3000/api/comment/modifyComment
