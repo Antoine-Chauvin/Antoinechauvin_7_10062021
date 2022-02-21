@@ -40,6 +40,7 @@ export default {
         .then((res) => {
           this.$emit('update:status');
           console.log(res);
+          this.$emit('close-popups')
         });
     },
     showModif() {

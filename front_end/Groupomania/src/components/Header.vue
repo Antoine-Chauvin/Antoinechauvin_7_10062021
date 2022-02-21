@@ -21,7 +21,7 @@
           <img src="../assets/x.svg" alt="fermer" />
         </div>
         <div class="vue">
-          <Profile @update:status="$emit('update:status')" />
+          <Profile @update:status="$emit('update:status')" @close-popups="closeProfile()" />
         </div>
       </div>
       <!--  -->
@@ -34,7 +34,7 @@
           <img src="../assets/x.svg" alt="fermer" />
         </div>
         <div class="vue">
-          <CreateStatus @update:status="$emit('update:status')" />
+          <CreateStatus @update:status="$emit('update:status')" @close-popups="closeCreate()"/>
         </div>
       </div>
       <div class="nav-icone" @click="logout">

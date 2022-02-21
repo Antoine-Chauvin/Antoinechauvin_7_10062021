@@ -5,7 +5,7 @@
         <img src="../assets/x.svg" alt="fermer" />
       </div>
       <div id="Modif">
-        <CreateStatus :postToModif="postToModif" @update:status="$emit('update:status')" />
+        <CreateStatus :postToModif="postToModif" @update:status="$emit('update:status')" @close-popups="closeModif()" />
       </div>
     </div>
     <div class="status" v-for="status in posts" :key="status.id_status">
@@ -34,7 +34,7 @@
         <div v-if="userCon.isAdmin === 1">
           <button @click.prevent="blocageStatus(status.id_status)">bloquer le status</button>
         </div>
-        <p>{{ status.created_at_status }}</p>
+        <p>Status crée le : {{ status.created_at_status }}</p>
       </router-link>
     </div>
   </div>

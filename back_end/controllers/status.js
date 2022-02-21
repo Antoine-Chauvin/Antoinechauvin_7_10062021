@@ -3,7 +3,7 @@ const fs = require('fs');
 
 //récupérer les status
 exports.getAllStatus = (req, res, next) => {
-    con.query(`SELECT id_status, title, status.user_id user_id, image, name, lastname, image_user, created_at_status, chanel_id, value
+    con.query(`SELECT id_status, title, status.user_id user_id, image, name, lastname, image_user, DATE_FORMAT(created_at_status, "%d/%m/%Y") AS created_at_status, chanel_id, value
                 FROM status 
                 JOIN user ON status.user_id = user.id_user  
                 LEFT JOIN vote ON status.id_status = vote.status_id 
@@ -30,7 +30,7 @@ exports.getAllstatusProfil = (req, res, next) => {
     })
 }
 exports.getAllstatusChanel = (req, res, next) => {
-    con.query(`SELECT id_status, status.title title, status.user_id user_id, chanel_id, image ,chanel.title chanel_title, content, name, lastname, image_user, created_at_status, value
+    con.query(`SELECT id_status, status.title title, status.user_id user_id, chanel_id, image ,chanel.title chanel_title, content, name, lastname, image_user, DATE_FORMAT(created_at_status, "%d/%m/%Y") AS created_at_status, value
                 FROM status 
                 JOIN chanel ON status.chanel_id = chanel.id_chanel
                 JOIN user ON status.user_id = user.id_user 
@@ -47,7 +47,7 @@ exports.getAllstatusChanel = (req, res, next) => {
 }
 
 exports.getOneStatus = (req, res, next) => {
-    con.query(`SELECT id_status, title, status.user_id user_id, chanel_id, created_at_status, image, name, lastname, image_user, value
+    con.query(`SELECT id_status, title, status.user_id user_id, chanel_id, DATE_FORMAT(created_at_status, "%d/%m/%Y") AS created_at_status, image, name, lastname, image_user, value
                 FROM status 
                 JOIN user ON status.user_id = user.id_user 
                 LEFT JOIN vote ON status.id_status = vote.status_id 

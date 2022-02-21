@@ -53,7 +53,7 @@ export default {
           .then((res) => {
             console.log(res);
             this.$emit('update:status');
-            this.$emit('');
+            this.$emit('close-popups');
           });
       } else {
         formData.append('statusId', this.postToModif.id_status);
@@ -62,6 +62,7 @@ export default {
           { headers: { authorization: `bearer ${localStorage.getItem('Token')}` } })
           .then(() => {
             this.$emit('update:status');
+            this.$emit('close-popups');
           });
       }
     },

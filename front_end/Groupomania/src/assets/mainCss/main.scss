@@ -55,7 +55,6 @@ $textColor:#303030;
 
 @mixin contentModif{
   position: fixed;
-  width: 100%;
   @media screen and (min-width: 768px){
       left: 25%;
       top: 20%;

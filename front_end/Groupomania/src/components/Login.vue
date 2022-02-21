@@ -1,7 +1,7 @@
 <template>
   <div class="Login">
     <h1>Connexion</h1>
-    <h1 v-if="error">{{ error }}</h1>
+    <p v-if="error">{{ error }}</p>
     <form @submit.prevent="connectUser">
       <div>
         <label for="userEmail">Email :</label>
