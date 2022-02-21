@@ -42,5 +42,5 @@ yarn serve
  ```
  yarn serve
  ```
-### Lancment
+### Lancement
 Aller sur votre navigateur et connecter vous au ```localhost:8080```
