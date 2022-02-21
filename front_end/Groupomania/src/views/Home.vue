@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     showCo() {
-      if (this.showConnect == true) {
+      if (this.showConnect === true) {
         this.showConnect = false;
         this.showsignup = true;
       } else {
@@ -43,7 +43,7 @@ export default {
       }
     },
     showSi() {
-      if (this.showsignup == false) {
+      if (this.showsignup === false) {
         this.showsignup = true;
         this.showConnect = false;
       } else {

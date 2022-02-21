@@ -23,7 +23,7 @@ export default {
     return {
       profile: '',
       files: null,
-      modifImg:false,
+      modifImg: false,
     };
   },
   methods: {
@@ -35,18 +35,17 @@ export default {
       for (const i of Object.keys(this.files)) {
         formData.append('image', this.files[i]);
       }
-      axios.put('http://localhost:3000/api/profile/modifUser',  formData, 
-      {headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
-      })
-      .then((res) => {
-       this.$emit('update:status')
-       console.log(res);
-      });
+      axios.put('http://localhost:3000/api/profile/modifUser', formData,
+        { headers: { authorization: `bearer ${localStorage.getItem('Token')}` } })
+        .then((res) => {
+          this.$emit('update:status');
+          console.log(res);
+        });
     },
-    showModif(){
-      this.modifImg = true
+    showModif() {
+      this.modifImg = true;
     },
-        defaultImg(img) {
+    defaultImg(img) {
       console.log(img);
       if (!img) {
         return '/pinkUser.png';

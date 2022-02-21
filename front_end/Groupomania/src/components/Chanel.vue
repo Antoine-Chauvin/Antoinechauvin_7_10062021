@@ -9,7 +9,7 @@
         <img src="../assets/hash.svg" alt="tag" />
         <router-link class="router-link" :to="{ name: 'Chanel', params: {id: chanel.id_chanel}}">{{ chanel.title }}</router-link>
       </div>
-      
+
     </div>
   </div>
 </template>
@@ -17,27 +17,25 @@
 <script>
 import axios from 'axios';
 
-
 export default {
   name: 'Chanels',
 
   data() {
     return {
       chanels: [],
-      showedBurger:false
+      showedBurger: false,
     };
   },
   methods: {
-    showMenu(){
-      if(this.showedBurger == false){
-      this.showedBurger = true;
-      }
-      else{
+    showMenu() {
+      if (this.showedBurger == false) {
+        this.showedBurger = true;
+      } else {
         this.showedBurger = false;
       }
     },
   },
-mounted() {
+  mounted() {
     axios
       .get('http://localhost:3000/api/chanel/getChanels', {
         headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
@@ -119,7 +117,7 @@ mounted() {
         background-color: $main_color;
         border-radius: 5px;
         position: absolute;
-        
+
       }
 
       .bar::before{

@@ -100,15 +100,13 @@ export default {
         });
     },
     like(id, value) {
-      axios.put('http://localhost:3000/api/status/voteStatus', 
-      { statusId: id, vote: value},
-      {headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
-      })
-      .then(() => {
+      axios.put('http://localhost:3000/api/status/voteStatus',
+        { statusId: id, vote: value },
+        { headers: { authorization: `bearer ${localStorage.getItem('Token')}` } })
+        .then(() => {
           this.$emit('update:status');
         });
-      
-      },
+    },
     defaultImg(img) {
       console.log(img);
       if (!img) {
@@ -172,8 +170,8 @@ export default {
         background-color: $main_color;
         img{
           width: 75%;
-          margin-top:6%;   
-          margin-left: 6%;       
+          margin-top:6%;
+          margin-left: 6%;
         }
       }
   }

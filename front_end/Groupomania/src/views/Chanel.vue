@@ -38,7 +38,7 @@ export default {
   },
   watch: {
     '$route.params.id': function (id) {
-       this.getPosts(id);
+      this.getPosts(id);
     },
   },
   mounted() {

@@ -75,8 +75,9 @@ export default {
     },
     handleSubmit() {
       const objectComment = {
-      'text': this.text,
-      'statusId': this.$route.params.id }
+        text: this.text,
+        statusId: this.$route.params.id,
+      };
       axios.post('http://localhost:3000/api/comment/createComment', objectComment, {
         headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
       });
@@ -130,7 +131,7 @@ export default {
     margin-left:15px;
     margin-top:5px;
     }
-    h3{ 
+    h3{
       display: inline;
       width: 20%;
     }

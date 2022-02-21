@@ -53,7 +53,7 @@ export default {
             password: this.PasswordLogin,
           })
           .then((response) => {
-            localStorage.setItem('Token', response.data.token)
+            localStorage.setItem('Token', response.data.token);
             this.$router.push({ name: 'accueil' });
           })
           .catch((error) => {

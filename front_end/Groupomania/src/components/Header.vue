@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       showedProfile: false,
-      showedCreate : false,
+      showedCreate: false,
     };
   },
   components: {
@@ -93,7 +93,6 @@ export default {
   @media screen and (min-width:768px) {
   border-radius:15px ;
   }
-  
 
   .logoGrp {
     width: 55%;
@@ -112,7 +111,7 @@ export default {
     width: 30%;
     display: flex;
     align-content: flex-end;
-    justify-content: space-around;    
+    justify-content: space-around;
     .nav-icone {
       width: 30%;
       @media screen and (min-width:768px) {

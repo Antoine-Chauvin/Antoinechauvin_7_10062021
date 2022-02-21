@@ -8,8 +8,6 @@
 
 @import "./assets/mainCss/main.scss";
 
-
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -17,6 +15,5 @@
   text-align: center;
   color: $main-color;
 }
-
 
 </style>
