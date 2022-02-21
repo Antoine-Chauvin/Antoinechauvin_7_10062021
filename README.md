@@ -5,11 +5,17 @@ Le backend a été crée avec Node.js, Express.js et MySQL comme base de donnée
 
 Installation
 Dans le terminal de VSCODE, situez-vous dans le dossier /backend.
-Démarrer npm install pour installer toutes les dependencies du backend.
+Démarrer 
+```npm install``` 
+installer toutes les dependencies du backend.
 
-Dans le fichier .env, veuillez rentrer les données comme dans le .env.init
+Créer un .env, veuillez rentrer les données comme dans le .env.init
 
-Démarrer nodemon server pour avoir accès au serveur de développement. L'application va se recharger automatiquement si vous modifiez un fichier source.
+Démarrer nodemon server avec 
+
+``` npm run serve ```
+
+pour avoir accès au serveur de développement. L'application va se recharger automatiquement si vous modifiez un fichier source.
 
 ## Frontend
 Le fronten a été crée avec vueJs. 
@@ -36,3 +42,5 @@ yarn serve
  ```
  yarn serve
  ```
+### Lancment
+Aller sur votre navigateur et connecter vous au ```localhost:8080```
