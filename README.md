@@ -9,7 +9,7 @@ Démarrer
 ```npm install``` 
 installer toutes les dependencies du backend.
 
-Créer un .env, veuillez rentrer les données comme dans le .env.init
+Créer un .env, veuillez rentrer les données comme dans le .env.dist
 
 Démarrer nodemon server avec 
 
