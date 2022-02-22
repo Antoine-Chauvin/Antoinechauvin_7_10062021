@@ -3,3 +3,5 @@
 /images/**/*
 !/images/**/
 !images/**/.gitkeep
+!/images/icon.png
+!/images/pinkUser.png

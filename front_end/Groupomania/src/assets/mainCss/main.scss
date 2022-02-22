@@ -56,10 +56,11 @@ $textColor:#303030;
 @mixin contentModif{
   width: 100%;
   position: fixed;
-  @media screen and (min-width: 1000px){
-      left: 25%;
+  @media screen and (min-width: 900px){
+      left: 50%;
       top: 20%;
-      /* transform: translateX(-50%); */
+      transform: translateX(-50%); 
+      width: 800px;
   }
       
 }

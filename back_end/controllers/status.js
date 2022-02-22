@@ -61,11 +61,13 @@ exports.getOneStatus = (req, res, next) => {
 
 //création d'un status
 exports.createStatus = (req, res, next) => {
-    const imageToShare = `/image_shared/${req.file.filename}`
-
+    let imageToShare 
+    if(req.file){
+    imageToShare = `/image_shared/${req.file.filename}`
+    }
     const regexStatus = /[a-zA-Z0-9 _.,!?€'’(Ééèàû)&]{2,100}$/;
 console.log('toto')
-    if (regexStatus.test(req.body.title) && req.file != null) {
+    if (regexStatus.test(req.body.title)) {
         const dataStatus = {
             image: imageToShare,
             title: req.body.title,

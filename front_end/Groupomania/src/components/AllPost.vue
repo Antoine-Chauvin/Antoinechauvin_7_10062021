@@ -24,7 +24,7 @@
       <router-link class="router-link" :to="{ name: 'Status', params: { id: status.id_status } }">
         <div class="status__shared">
           <h3 class="status--title">{{ status.title }}</h3>
-          <img :src="'http://localhost:3000/images' + status.image" alt="Image shared" />
+          <img :src="'http://localhost:3000/images' + defaultImgStatus(status.image)" alt="Image shared" />
         </div>
         <div class="like">
           <img src="../assets/thumbs-up.svg" alt="like"
@@ -116,6 +116,12 @@ export default {
       }
       return img;
     },
+    defaultImgStatus(img) {
+      if (!img) {
+        return '/icon.png';
+      }
+      return img;
+    },
   },
   mounted() {
     this.verifUser();
@@ -158,7 +164,7 @@ export default {
     .status__shared {
       img {
         max-height: 700px;
-        width:95%;
+        max-width:95%;
         object-fit: contain;
       }
     }
