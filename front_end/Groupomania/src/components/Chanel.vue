@@ -7,7 +7,10 @@
       <h3>Chanels :</h3>
       <div v-for="chanel in chanels" :key=chanel.id_chanel>
         <img src="../assets/hash.svg" alt="tag" />
-        <router-link class="router-link" :to="{ name: 'Chanel', params: {id: chanel.id_chanel}}">{{ chanel.title }}</router-link>
+        <router-link class="router-link"
+        :to="{ name: 'Chanel', params: {id: chanel.id_chanel}}">
+        {{ chanel.title }}
+        </router-link>
       </div>
 
     </div>
@@ -28,7 +31,7 @@ export default {
   },
   methods: {
     showMenu() {
-      if (this.showedBurger == false) {
+      if (!this.showedBurger) {
         this.showedBurger = true;
       } else {
         this.showedBurger = false;

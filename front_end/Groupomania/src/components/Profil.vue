@@ -32,22 +32,20 @@ export default {
     },
     handleSubmit() {
       const formData = new FormData();
-      for (const i of Object.keys(this.files)) {
+      Object.keys(this.files).forEach((i) => {
         formData.append('image', this.files[i]);
-      }
+      });
       axios.put('http://localhost:3000/api/profile/modifUser', formData,
         { headers: { authorization: `bearer ${localStorage.getItem('Token')}` } })
-        .then((res) => {
+        .then(() => {
           this.$emit('update:status');
-          console.log(res);
-          this.$emit('close-popups')
+          this.$emit('close-popups');
         });
     },
     showModif() {
       this.modifImg = true;
     },
     defaultImg(img) {
-      console.log(img);
       if (!img) {
         return '/pinkUser.png';
       }

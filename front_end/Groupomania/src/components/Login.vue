@@ -58,10 +58,8 @@ export default {
           })
           .catch((error) => {
             this.error = error.response.data.message;
-            console.log(error.response.data.message);
           });
       } else {
-        console.log('validation,renvoie une erreur');
         this.invalid = true;
       }
     },

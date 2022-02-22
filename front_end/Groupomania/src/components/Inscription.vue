@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     createUser() {
-      this.error = ''
+      this.error = '';
       const formRegEx = new RegExp("^[a-zA-Z,'-]+$");
       const mailRegEx = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
       const passRegex = new RegExp("^[a-zA-Z0-9,'-]+$");
@@ -84,18 +84,18 @@ export default {
             this.error = error.response.data.message;
           });
       } else {
-        if(!formRegEx.test(this.userName)){
-          this.error += 'Prenom invalide, ne doit contenir que des lettre<br>'
-        };
-        if(!formRegEx.test(this.userLastname)){
-          this.error += 'Nom invalide, ne doit contenir que des lettre<br>'
-        };
-        if(!mailRegEx.test(this.userEmail)){
-          this.error += 'Email invalid<br>'
-        };
-        if(!passRegex.test(this.userPassword)){
-          this.error += 'Mot de passe invalide<br>'
-        };
+        if (!formRegEx.test(this.userName)) {
+          this.error += 'Prenom invalide, ne doit contenir que des lettre<br>';
+        }
+        if (!formRegEx.test(this.userLastname)) {
+          this.error += 'Nom invalide, ne doit contenir que des lettre<br>';
+        }
+        if (!mailRegEx.test(this.userEmail)) {
+          this.error += 'Email invalid<br>';
+        }
+        if (!passRegex.test(this.userPassword)) {
+          this.error += 'Mot de passe invalide<br>';
+        }
       }
     },
   },

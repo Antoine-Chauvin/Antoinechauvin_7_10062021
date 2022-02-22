@@ -5,7 +5,9 @@
         <img src="../assets/x.svg" alt="fermer" />
       </div>
       <div id="Modif">
-        <CreateStatus :postToModif="postToModif" @update:status="$emit('update:status')" @close-popups="closeModif()" />
+        <CreateStatus :postToModif="postToModif"
+        @update:status="$emit('update:status')"
+        @close-popups="closeModif()" />
       </div>
     </div>
     <div class="status" v-for="status in posts" :key="status.id_status">
@@ -25,8 +27,11 @@
           <img :src="'http://localhost:3000/images' + status.image" alt="Image shared" />
         </div>
         <div class="like">
-          <img src="../assets/thumbs-up.svg" alt="like" @click.prevent="like(status.id_status, 1)" v-if="status.value !==1" />
-          <img src="../assets/thumbs-up-filled.svg" alt="unlike" @click.prevent="like(status.id_status,0)" v-else />
+          <img src="../assets/thumbs-up.svg" alt="like"
+          @click.prevent="like(status.id_status, 1)"
+          v-if="status.value !==1" />
+          <img src="../assets/thumbs-up-filled.svg" alt="unlike"
+          @click.prevent="like(status.id_status,0)" v-else />
         </div>
         <div v-if="userCon.userId == status.user_id">
           <button @click.prevent="showModif(status)">Modifer</button>
@@ -62,9 +67,7 @@ export default {
   props: {
     posts: {
       type: Array,
-      default: () => {
-        [];
-      },
+      default: () => [],
     },
   },
   methods: {
@@ -108,7 +111,6 @@ export default {
         });
     },
     defaultImg(img) {
-      console.log(img);
       if (!img) {
         return '/pinkUser.png';
       }

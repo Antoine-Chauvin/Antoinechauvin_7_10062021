@@ -47,7 +47,6 @@ export default {
   },
   methods: {
     defaultImg(img) {
-      console.log(img);
       if (!img) {
         return '/pinkUser.png';
       }
@@ -89,6 +88,13 @@ export default {
       this.getPost(id);
     },
   },
+  beforeMount() {
+    const userTk = localStorage.getItem('Token').split('.')[1];
+    const user = JSON.parse(atob(userTk));
+    if (!localStorage.getItem('Token') || user.exp < Date.now() / 1000) {
+      this.$router.push({ name: 'Home' });
+    }
+  },
   mounted() {
     this.getPost(this.$route.params.id);
     this.loadComments(this.$route.params.id);
@@ -97,50 +103,48 @@ export default {
 </script>
 
 <style lang="scss" scope>
-
-@import "../assets/mainCss/main.scss";
+@import '../assets/mainCss/main.scss';
 
 .createComment {
   position: relative;
   top: 125px;
   left: 0;
-  @media screen and (min-width:768px) {
+  @media screen and (min-width: 768px) {
     top: 90px;
     width: 900px;
     left: 25%;
   }
-
 }
-.comments{
+.comments {
   display: flex;
   flex-direction: column;
   position: relative;
   border-radius: 5px;
   box-shadow: $shadowBox;
-  top:125px;
-  @media screen and (min-width:768px) {
-     width: 900px;
-      left: 25%;
-      top:90px;
+  top: 125px;
+  @media screen and (min-width: 768px) {
+    width: 900px;
+    left: 25%;
+    top: 90px;
   }
-  .commentsCreator{
+  .commentsCreator {
     display: flex;
     flex-wrap: wrap;
-    img{
-    @include imgCrea;
-    margin-left:15px;
-    margin-top:5px;
+    img {
+      @include imgCrea;
+      margin-left: 15px;
+      margin-top: 5px;
     }
-    h3{
+    h3 {
       display: inline;
       width: 20%;
     }
-    p{
-      margin-top: 21.280px;
+    p {
+      margin-top: 21.28px;
     }
   }
-.commShared{
-align-self:left;
-}
+  .commShared {
+    align-self: left;
+  }
 }
 </style>

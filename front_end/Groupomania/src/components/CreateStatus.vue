@@ -40,9 +40,9 @@ export default {
     },
     handleSubmit() {
       const formData = new FormData();
-      for (const i of Object.keys(this.files)) {
+      Object.keys(this.files).forEach((i) => {
         formData.append('image', this.files[i]);
-      }
+      });
       formData.append('title', this.title);
       formData.append('chanChoose', this.chanChoose);
       if (this.postToModif == null) {
@@ -50,8 +50,7 @@ export default {
           .post('http://localhost:3000/api/status/createStatus', formData, {
             headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
           })
-          .then((res) => {
-            console.log(res);
+          .then(() => {
             this.$emit('update:status');
             this.$emit('close-popups');
           });
