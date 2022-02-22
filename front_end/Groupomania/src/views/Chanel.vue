@@ -42,11 +42,11 @@ export default {
     },
   },
   beforeMount() {
-    let user = null
-    if (localStorage.getItem('Token') !== null) {
+    let user = null;
+    if (localStorage.getItem('Token')) {
       const userTk = localStorage.getItem('Token').split('.')[1];
-       user = JSON.parse(atob(userTk));
-      }
+      user = JSON.parse(atob(userTk));
+    }
     if (!localStorage.getItem('Token') || user.exp < Date.now() / 1000) {
       this.$router.push({ name: 'Home' });
     }

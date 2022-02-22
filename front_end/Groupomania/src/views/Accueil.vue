@@ -27,21 +27,23 @@ export default {
   },
   methods: {
     loadStatus() {
-      axios
-        .get('http://localhost:3000/api/status/getAllStatus', {
-          headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
-        })
-        .then((response) => {
-          this.posts = response.data;
-        });
+      if (localStorage.getItem('Token')) {
+        axios
+          .get('http://localhost:3000/api/status/getAllStatus', {
+            headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
+          })
+          .then((response) => {
+            this.posts = response.data;
+          });
+      }
     },
   },
   beforeMount() {
-    let user = null
-    if (localStorage.getItem('Token') !== null) {
+    let user = null;
+    if (localStorage.getItem('Token')) {
       const userTk = localStorage.getItem('Token').split('.')[1];
       user = JSON.parse(atob(userTk));
-      }
+    }
     if (!localStorage.getItem('Token') || user.exp < Date.now() / 1000) {
       this.$router.push({ name: 'Home' });
     }

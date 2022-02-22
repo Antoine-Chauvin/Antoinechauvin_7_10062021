@@ -72,9 +72,11 @@ export default {
   },
   methods: {
     verifUser() {
-      const userTk = localStorage.getItem('Token').split('.')[1];
-      const user = JSON.parse(atob(userTk));
-      this.userCon = user;
+      if (localStorage.getItem('Token')) {
+        const userTk = localStorage.getItem('Token').split('.')[1];
+        const user = JSON.parse(atob(userTk));
+        this.userCon = user;
+      }
     },
 
     showModif(Status) {

@@ -39,13 +39,15 @@ export default {
     },
   },
   mounted() {
-    axios
-      .get('http://localhost:3000/api/chanel/getChanels', {
-        headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
-      })
-      .then((response) => {
-        this.chanels = response.data;
-      });
+    if (localStorage.getItem('Token')) {
+      axios
+        .get('http://localhost:3000/api/chanel/getChanels', {
+          headers: { authorization: `bearer ${localStorage.getItem('Token')}` },
+        })
+        .then((response) => {
+          this.chanels = response.data;
+        });
+    }
   },
 };
 </script>
