@@ -37,8 +37,11 @@ export default {
     },
   },
   beforeMount() {
-    const userTk = localStorage.getItem('Token').split('.')[1];
-    const user = JSON.parse(atob(userTk));
+    let user = null
+    if (localStorage.getItem('Token') !== null) {
+      const userTk = localStorage.getItem('Token').split('.')[1];
+      user = JSON.parse(atob(userTk));
+      }
     if (!localStorage.getItem('Token') || user.exp < Date.now() / 1000) {
       this.$router.push({ name: 'Home' });
     }

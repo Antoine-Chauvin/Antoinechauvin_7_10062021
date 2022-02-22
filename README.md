@@ -1,7 +1,9 @@
 # Projet N°7 Dev Web : Groupomania 
 
 ## Backend
-Le backend a été crée avec Node.js, Express.js et MySQL comme base de données.
+Le backend a été crée avec Node.js, Express.js et MySQL Pour la base de données.
+
+Il faut importez la base de donnée puis suivre les indications pour installer le reste.
 
 Installation
 Dans le terminal de VSCODE, situez-vous dans le dossier /backend.
